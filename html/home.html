@@ -8,20 +8,126 @@
     <link rel="stylesheet" href="../css/home.css">
   </head>
   <body>
-    <div class="swiper-box">
-      轮播图
+    <div class="page-home">
+
+        <div class="search-bg">
+            <div class="search-box">
+                <input type="text" placeholder="  搜索">
+                <span class="sure-btn">确定</span>
+            </div>
+        </div>
+
+        <div class="swiper-box">
+            <div class="swipe" id="slider">
+                <div class="swipe-wrap">
+                </div>
+                <script id="slideTemp" type="text/x-dot-template">
+                  {{~it:value:index}}
+                  <div class="swiper-slide">
+                      <div class="slide-img" style="background-image:url('{{=value.img}}')">
+                      </div>
+                  </div>
+                  {{~}}
+                </script>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <div class="types-box">
+            <div class="slide-box">
+                <span class="slide-title">为你推荐</span>
+            </div>
+
+            <div class="goods-content" id="goods">
+            </div>
+
+            <script type="text/x-dot-template" id="goodsTemp">
+              {{~it:value:index}}
+              <div class="list" id="{{=value.id}}">
+                  <div class="goods-img" style="background-image:url('{{=value.img_url}}')"></div>
+                  <div class="goods-info">
+                      <div class="detail">{{=value.goods_name}}</div>
+                      <div class="preferential">
+                          <div class="discount-price"><span>￥</span>{{=(value.price-value.coupon_price).toFixed(2)}}</div>
+                          <div class="is-self">已抢{{=value.order_count}}件</div>
+                      </div>
+                      <div class="price-left">
+                          <span class="origin-price">淘宝￥{{=value.price}}</span>
+                      </div>
+                      <div class="price">
+                          <div class="coupon-bg"><span>券减{{=value.coupon_price}}元</span></div>
+                          <div class="rebate"><span>返￥5.72</span></div>
+                      </div>
+                  </div>
+              </div>
+              {{~}}
+            </script>
+
+        </div>
+
     </div>
-    <div class="footer-bar">
-      <a href="javascript:void(0)">首页</a>
-      <a href="./classify.html">分类</a>
-    </div>
+
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript" src="../script/swipe.js"></script>
   <script type="text/javascript" src="../script/doT.min.js"></script>
+  <script type="text/javascript" src="../script/crypto-js.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
   <script type="text/javascript">
+  var uid;
+  var token;
+  var slider;
+  var searchVal;
   apiready = function(){
-
+    uid=api.pageParam.uid||$api.getStorage('uid');
+    token=api.pageParam.token||$api.getStorage('token');
+    getSlideList();
+    getProductsList();
+  /*  setTimeout(function() {
+      initalSwipe();
+    },500)*/
   };
+  function initalSwipe(){
+    slider=Swipe($api.byId('slider'),{
+      //"auto":3000,
+      //"continuous":true
+    })
+  }
+  function getSlideList() {
+    var str=paramsData({});
+    var url=baseUrl+'/OtherInfoBannerList?'+str;
+    $api.get(url,function(ret){
+      var _res=ret;
+      if(200==_res.errcode){
+          //window.alert("slide:"+JSON.stringify(ret));
+          var slide=doT.template($api.dom('#slideTemp').innerHTML);
+          $api.dom('.swipe-wrap').innerHTML=slide(_res.data);
+          window.alert(slide(_res.data));
+          initalSwipe();
+      }
+    },'json');
+  }
+  function getProductsList(){
+    var _page=1;
+    var pagesize=4;
+    var sku_name=searchVal||'';
+    var data;
+    if (sku_name.length <= 0) {
+            data = { page: _page  }
+        } else {
+            data = {goods_name: sku_name, page: _page, pagesize: pagesize }
+        }
+    var str=paramsData(data);
+    var url=baseUrl+'/IndexCommodity?'+str;
+    $api.get(url,function(ret) {
+      var _res=ret;
+      if(200==_res.errcode){
+          //window.alert("goods:"+JSON.stringify(ret));
+          var goods=doT.template($api.dom('#goodsTemp').innerHTML);
+          $api.byId('goods').innerHTML=goods(_res.data);
+
+      }
+    },'json')
+  }
   </script>
 </html>
