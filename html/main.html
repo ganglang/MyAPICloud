@@ -5,67 +5,103 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
     <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
-    <title>Hello APP</title>
+    <title>星咖生活</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
-    <style>
-        label {
-            margin: 10px;
-            font-size: 24px;
-        }
-
-        ul {
-            margin-bottom: 10px;
-        }
-
-        ul li {
-            margin: 5px 10px;
-            padding: 5px;
-            color: #000;
-            word-wrap: break-word;
-        }
-    </style>
+      <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
-    <label>Hello APP</label>
-    <div id='sys-info'></div>
+
+  <div class="foot-bar">
+    <div class="barItem" onclick="navToPage(0)">
+        <div class="bar_icon">
+
+        </div>
+        <div class="bar_font">首页</div>
+    </div>
+
+    <div class="barItem" onclick="navToPage(1)">
+        <div class="bar_icon">
+
+        </div>
+        <div class="bar_font">分类</div>
+    </div>
+
+    <div class="barItem" onclick="navToPage(2)">
+        <div class="bar_icon">
+
+        </div>
+        <div class="bar_font">升级VIP</div>
+    </div>
+
+    <div class="barItem" onclick="navToPage(3)">
+        <div class="bar_icon">
+
+        </div>
+        <div class="bar_font">购物车</div>
+    </div>
+
+    <div class="barItem" onclick="navToPage(4)">
+        <div class="bar_icon">
+
+        </div>
+        <div class="bar_font">我的</div>
+    </div>
+  </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
-    apiready = function() {
-        var ver = api.version;
-        var sType = api.systemType;
-        var sVer = api.systemVersion;
-        var id = api.deviceId;
-        var model = api.deviceModel;
-        var name = api.deviceName;
-        var cType = api.connectionType;
-        var winName = api.winName;
-        var winWidth = api.winWidth;
-        var winHeight = api.winHeight;
-        var frameName = api.frameName || '';
-        var frameWidth = api.frameWidth || '';
-        var frameHeight = api.frameHeight || '';
+var uid;
+var token;
+apiready = function(){
+  fnInital();
+  uid=api.pageParam.uid||$api.getStorage('uid');
+  token=api.pageParam.token||$api.getStorage('token');
+};
+var barItems;
+var frames=['home','classify','vip','cart','personal'];
+var footerBarH;
+function fnInital(){
+  var footerBar=$api.dom('.foot-bar');
+  barItems=$api.domAll(footerBar,'.barItem');
+  footerBarH=$api.offset(footerBar).h;
+  navToPage(0);
+}
 
-        var str = '<ul>';
-        str += '<li>引擎版本信息: ' + ver + '</li>';
-        str += '<li>系统类型: ' + sType + '</li>';
-        str += '<li>系统版本: ' + sVer + '</li>';
-        str += '<li>设备标识: ' + id + '</li>';
-        str += '<li>设备型号: ' + model + '</li>';
-        str += '<li>设备名称: ' + name + '</li>';
-        str += '<li>网络状态: ' + cType + '</li>';
-        str += '<li>主窗口名字: ' + winName + '</li>';
-        str += '<li>主窗口宽度: ' + winWidth + '</li>';
-        str += '<li>主窗口高度: ' + winHeight + '</li>';
-        str += '<li>子窗口名字: ' + frameName + '</li>';
-        str += '<li>子窗口宽度: ' + frameWidth + '</li>';
-        str += '<li>子窗口高度: ' + frameHeight + '</li>';
-        str += '</ul>';
+function navToPage(n) {
+  for(var i=0;i<barItems.length;i++){
+    if(n==i){
+      $api.addCls(barItems[i],'active');
+      api.openFrame({
+          name: frames[i],
+          url: './'+frames[i]+'.html',
+          rect: {
+              x: 0,
+              y: 0,
+              w: 'auto',
+              h: api.frameHeight-footerBarH
+          },
+          pageParam: {
+              uid: uid,
+              token:token
+          },
+          bounces: false,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: false,
+          hScrollBarEnabled: false
+      });
+    }else{
+      $api.removeCls(barItems[i],'active');
+      api.setFrameAttr({
+          name: frames[i],
+          hidden:true
+      });
+    }
+  }
 
-        $api.byId('sys-info').innerHTML = str;
 
-    };
+};
+
 </script>
-
 </html>
