@@ -13,35 +13,35 @@
 <body>
 
   <div class="foot-bar">
-    <div class="barItem" onclick="navToPage(0)">
+    <div class="barItem" onclick="toggleFrame(0)">
         <div class="bar_icon">
 
         </div>
         <div class="bar_font">首页</div>
     </div>
 
-    <div class="barItem" onclick="navToPage(1)">
+    <div class="barItem" onclick="toggleFrame(1)">
         <div class="bar_icon">
 
         </div>
         <div class="bar_font">分类</div>
     </div>
 
-    <div class="barItem" onclick="navToPage(2)">
+    <div class="barItem" onclick="toggleFrame(2)">
         <div class="bar_icon">
 
         </div>
         <div class="bar_font">升级VIP</div>
     </div>
 
-    <div class="barItem" onclick="navToPage(3)">
+    <div class="barItem" onclick="toggleFrame(3)">
         <div class="bar_icon">
 
         </div>
         <div class="bar_font">购物车</div>
     </div>
 
-    <div class="barItem" onclick="navToPage(4)">
+    <div class="barItem" onclick="toggleFrame(4)">
         <div class="bar_icon">
 
         </div>
@@ -66,10 +66,11 @@ function fnInital(){
   var footerBar=$api.dom('.foot-bar');
   barItems=$api.domAll(footerBar,'.barItem');
   footerBarH=$api.offset(footerBar).h;
-  navToPage(0);
+  //window.alert(footerBarH);
+  toggleFrame(0);
 }
 
-function navToPage(n) {
+function toggleFrame(n) {
   for(var i=0;i<barItems.length;i++){
     if(n==i){
       $api.addCls(barItems[i],'active');
