@@ -111,7 +111,6 @@
           //window.alert("slide:"+JSON.stringify(ret));
           var slide=doT.template($api.dom('#slideTemp').innerHTML);
           $api.dom('.swipe-wrap').innerHTML=slide(_res.data);
-          //window.alert(slide(_res.data));
           initalSwipe();
       }
     },'json');
@@ -131,7 +130,6 @@
     $api.get(url,function(ret) {
       var _res=ret;
       if(200==_res.errcode){
-          //window.alert("goods:"+JSON.stringify(ret));
           if(page==1){
             productsData=_res.data;
           }else{

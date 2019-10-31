@@ -17,7 +17,6 @@ function paramsData(data){
   return newStr;
 }
 
-
 function pullUpRefresh(callback){
   api.addEventListener({
       name: 'scrolltobottom',
