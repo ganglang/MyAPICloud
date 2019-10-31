@@ -5,73 +5,169 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>星咖生活</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" href="../css/home.css">
   </head>
   <body>
-    <div class="page-home">
+    <div class="nav-content fixed" style="display:none">
+       <div class="column-list">
+           <div class="icon-btn" onclick="navToPage('optimization','',true)">
+               <img src="../assets/imgs/home/zy_icon.png" alt="#">
+               <span>优选</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('overseas','',true)">
+               <img src="../assets/imgs/home/hwg_icon.png" alt="#">
+               <span>海外购</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('platform',{platform:'jingdong'},true)">
+               <img src="../assets/imgs/home/jd_icon.png" alt="#">
+               <span>京东</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('platform',{platform:'tianmao'},true)">
+               <img src="../assets/imgs/home/tm_icon.png" alt="#">
+               <span>天猫</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('platform',{platform:'taobao'},true)">
+               <img src="../assets/imgs/home/tb_icon.png" alt="#">
+               <span>淘宝</span>
+           </div>
+       </div>
+       <div class="column-list column-list2">
+           <div class="icon-btn">
+               <img src="../assets/imgs/home/hotel_icon.png" alt="#">
+               <span>酒店</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('https://mall.gd10010.cn/component_lib/mating/mtDetail.do?mtact=604668&mtchnel=95378281&id=36365954210','',false)">
+               <img src="../assets/imgs/home/call_icon.png" alt="#">
+               <span>送话费</span>
+           </div>
+           <div class="icon-btn">
+               <img src="../assets/imgs/home/video_icon.png" alt="#">
+               <span>视频vip</span>
+           </div>
+           <div class="icon-btn" onclick="navToPage('http://dywsxykh5.hcwjpay.com/wechat/pages/wailian/wailian.html?merCode=0fd93b0e781a446598a03ca45d40a722','',false)">
+               <img src="../assets/imgs/home/card_icon.png" alt="#">
+               <span>信用卡</span>
+           </div>
+           <div class="icon-btn">
+               <img src="../assets/imgs/home/gift_icon.png" alt="#">
+               <span>大礼包</span>
+           </div>
+       </div>
+   </div>
+   <div class="scroll" id="scroll">
+     <div class="page-home">
 
-        <div class="search-bg">
-            <div class="search-box">
-                <input type="text" placeholder="  搜索" oninput="getInput()" onfocus="showSure()" onblur="hideSure()" id="keyWord">
-                <span class="sure-btn" onclick="toSearch()" style="display:none">确定</span>
-            </div>
-        </div>
+         <div class="search-bg">
+             <div class="search-box">
+                 <input type="text" placeholder="  搜索" oninput="getInput()" onfocus="showSure()" onblur="hideSure()" id="keyWord">
+                 <span class="sure-btn" onclick="toSearch()" style="display:none">确定</span>
+             </div>
+         </div>
 
-        <div class="swiper-box">
-            <div class="swipe" id="slider">
-                <div class="swipe-wrap">
+         <div class="swiper-box">
+             <div class="swipe" id="slider">
+                 <div class="swipe-wrap">
+                 </div>
+                 <script id="slideTemp" type="text/x-dot-template">
+                   {{~it:value:index}}
+                   <div class="swiper-slide" onclick="navToPage('{{=value.url}}','',false)">
+                       <div class="slide-img" style="background-image:url('{{=value.img}}')">
+                       </div>
+                   </div>
+                   {{~}}
+                 </script>
+                 <div class="swiper-pagination"></div>
+             </div>
+         </div>
+
+         <div class="nav-content" id="fastNav">
+            <div class="column-list">
+                <div class="icon-btn" onclick="navToPage('optimization','',true)">
+                    <img src="../assets/imgs/home/zy_icon.png" alt="#">
+                    <span>优选</span>
                 </div>
-                <script id="slideTemp" type="text/x-dot-template">
-                  {{~it:value:index}}
-                  <div class="swiper-slide">
-                      <div class="slide-img" style="background-image:url('{{=value.img}}')">
-                      </div>
-                  </div>
-                  {{~}}
-                </script>
-                <div class="swiper-pagination"></div>
+                <div class="icon-btn" onclick="navToPage('overseas','',true)">
+                    <img src="../assets/imgs/home/hwg_icon.png" alt="#">
+                    <span>海外购</span>
+                </div>
+                <div class="icon-btn" onclick="navToPage('platform',{platform:'jingdong'},true)">
+                    <img src="../assets/imgs/home/jd_icon.png" alt="#">
+                    <span>京东</span>
+                </div>
+                <div class="icon-btn" onclick="navToPage('platform',{platform:'tianmao'},true)">
+                    <img src="../assets/imgs/home/tm_icon.png" alt="#">
+                    <span>天猫</span>
+                </div>
+                <div class="icon-btn" onclick="navToPage('platform',{platform:'taobao'},true)">
+                    <img src="../assets/imgs/home/tb_icon.png" alt="#">
+                    <span>淘宝</span>
+                </div>
+            </div>
+            <div class="column-list column-list2">
+                <div class="icon-btn">
+                    <img src="../assets/imgs/home/hotel_icon.png" alt="#">
+                    <span>酒店</span>
+                </div>
+                <div class="icon-btn" onclick="navToPage('https://mall.gd10010.cn/component_lib/mating/mtDetail.do?mtact=604668&mtchnel=95378281&id=36365954210','',false)">
+                    <img src="../assets/imgs/home/call_icon.png" alt="#">
+                    <span>送话费</span>
+                </div>
+                <div class="icon-btn">
+                    <img src="../assets/imgs/home/video_icon.png" alt="#">
+                    <span>视频vip</span>
+                </div>
+                <div class="icon-btn" onclick="navToPage('http://dywsxykh5.hcwjpay.com/wechat/pages/wailian/wailian.html?merCode=0fd93b0e781a446598a03ca45d40a722','',false)">
+                    <img src="../assets/imgs/home/card_icon.png" alt="#">
+                    <span>信用卡</span>
+                </div>
+                <div class="icon-btn">
+                    <img src="../assets/imgs/home/gift_icon.png" alt="#">
+                    <span>大礼包</span>
+                </div>
             </div>
         </div>
 
-        <div class="types-box">
-            <div class="slide-box">
-                <span class="slide-title">为你推荐</span>
-            </div>
+         <div class="types-box">
+             <div class="slide-box">
+                 <span class="slide-title">为你推荐</span>
+             </div>
 
-            <div class="goods-content" id="goods">
-            </div>
+             <div class="goods-content" id="goods">
+             </div>
 
-            <script type="text/x-dot-template" id="goodsTemp">
-              {{~it:value:index}}
-              <div class="list" id="{{=value.id}}">
-                  <div class="goods-img" style="background-image:url('{{=value.img_url}}')"></div>
-                  <div class="goods-info">
-                      <div class="detail">{{=value.goods_name}}</div>
-                      <div class="preferential">
-                          <div class="discount-price"><span>￥</span>{{=(value.price-value.coupon_price).toFixed(2)}}</div>
-                          <div class="is-self">已抢{{=value.order_count}}件</div>
-                      </div>
-                      <div class="price-left">
-                          <span class="origin-price">淘宝￥{{=value.price}}</span>
-                      </div>
-                      <div class="price">
-                          <div class="coupon-bg"><span>券减{{=value.coupon_price}}元</span></div>
-                          <div class="rebate"><span>返￥5.72</span></div>
-                      </div>
-                  </div>
-              </div>
-              {{~}}
-            </script>
+             <script type="text/x-dot-template" id="goodsTemp">
+               {{~it:value:index}}
+               <div class="list" id="{{=value.id}}" onclick="navToPage('productDetail',{goodsId:{{=value.id}}},true)">
+                   <div class="goods-img" style="background-image:url('{{=value.img_url}}')"></div>
+                   <div class="goods-info">
+                       <div class="detail">{{=value.goods_name}}</div>
+                       <div class="preferential">
+                           <div class="discount-price"><span>￥</span>{{=(value.price-value.coupon_price).toFixed(2)}}</div>
+                           <div class="is-self">已抢{{=value.order_count}}件</div>
+                       </div>
+                       <div class="price-left">
+                           <span class="origin-price">淘宝￥{{=value.price}}</span>
+                       </div>
+                       <div class="price">
+                           <div class="coupon-bg"><span>券减{{=value.coupon_price}}元</span></div>
+                           <div class="rebate"><span>返￥5.72</span></div>
+                       </div>
+                   </div>
+               </div>
+               {{~}}
+             </script>
 
-        </div>
+         </div>
 
-        <div class="loadMore" style="display:none;">
-          <div class="loadMore-text">
-            加载更多...
-          </div>
-        </div>
+         <div class="loadMore" style="display:none;">
+           <div class="loadMore-text">
+             加载更多...
+           </div>
+         </div>
 
-    </div>
+     </div>
+   </div>
 
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
@@ -95,6 +191,7 @@
       initalSwipe();
     },500);
     pullUpRefresh(getProductsList);
+    toggleFix();
   };
   function initalSwipe(){
     slider=Swipe($api.byId('slider'),{
@@ -144,10 +241,11 @@
   function getInput(){
     var input=$api.byId('keyWord');
     if(input.value){
-      $api.css(input,'backgroundImage:none');
+      $api.css(input,'background-image:none');
+      //window.alert("不是空的")
     }else{
-      $api.css(input,'backgroundImage:url("../assets/imgs/home/search_btn.png")');
-      window.alert("空的")
+      $api.css(input,'background-image:url("../assets/imgs/home/search_btn.png")');
+      //window.alert("空的")
     }
     searchVal=input.value.trim();
   }
@@ -162,7 +260,26 @@
     },1000)
   }
   function toSearch() {
-
+    page=1;
+    getProductsList();
   }
+
+  function toggleFix() {
+    var nav=$api.dom('#fastNav');
+    var navHeight=$api.offset(nav).t;
+    var scroll=$api.dom('#scroll');
+    $api.css(scroll,"height:"+api.frameHeight+"px;overflow-y:scroll");
+    var scrollHeight;
+    var navFix=$api.dom('.nav-content.fixed');
+    $api.addEvt(scroll,'scroll', function() {
+      scrollHeight=scroll.scrollTop;
+      if(scrollHeight>navHeight){
+        $api.css(navFix,"display:block");
+      }else{
+        $api.css(navFix,"display:none");
+      }
+    });
+  }
+
   </script>
 </html>

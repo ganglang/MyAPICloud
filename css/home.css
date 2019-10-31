@@ -156,7 +156,8 @@ div {
   width: 100%;
   max-width: 100%;
   min-height: 177.8666666667vw;
-  background-color: #EFEFF4; }
+  background-color: #EFEFF4;
+  position: relative; }
   .page-home .swiper-box {
     display: block;
     height: 69.3333333333vw;
@@ -408,5 +409,45 @@ div {
             padding: 0 1.3333333333vw; }
             .page-home .types-box .goods-content .list .goods-info .price .rebate span {
               line-height: 1; }
+
+.nav-content.fixed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.6666666667vw 0vw;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex-direction: column;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999; }
+  .nav-content.fixed .column-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 93.0666666667vw;
+    margin: 0 auto;
+    margin-bottom: 2.6666666667vw; }
+    .nav-content.fixed .column-list .hidden {
+      display: none !important; }
+    .nav-content.fixed .column-list .icon-btn {
+      width: 25%;
+      display: flex;
+      align-items: center;
+      flex-direction: column; }
+      .nav-content.fixed .column-list .icon-btn > img {
+        width: 9.6vw;
+        height: auto; }
+      .nav-content.fixed .column-list .icon-btn > span {
+        font-size: 3.2vw;
+        color: #000000;
+        margin: 1.0666666667vw 0; }
+  .nav-content.fixed .column-list2 {
+    margin-bottom: 0; }
+    .nav-content.fixed .column-list2 .icon-btn > img {
+      width: 6.9333333333vw; }
 
 /*# sourceMappingURL=home.css.map */

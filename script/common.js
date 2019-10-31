@@ -36,3 +36,27 @@ function pullUpRefresh(callback){
   });
 
 }
+
+function navToPage(path,param,isIn){
+  if(path.length<5) return;
+  var uid;
+  var token;
+  if(isIn){
+    uid=api.pageParam.uid||$api.getStorage('uid');
+    token=api.pageParam.token||$api.getStorage('token');
+    Object.assign(param,{uid:uid,token:token});
+    api.openWin({
+        name: path,
+        url: './'+path+'.html',
+        pageParam:param
+    });
+  }else{
+    api.openWin({
+        name:'outlink',
+        url: path
+    });
+
+  }
+
+
+}
