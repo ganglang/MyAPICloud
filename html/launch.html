@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+    启动页
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+        fnOpenFrameGroup();
+      };
+      function fnOpenFrameGroup() {
+        api.openFrameGroup ({
+            name: 'group1',
+            background: '#fff',
+            scrollEnabled: true,
+            rect: {
+                 x: 0,
+                 y: 0,
+                 w: 'auto',
+                 h: 'auto'
+            },
+            index: 0,
+            frames: [{
+                name: 'frame1',
+                url: 'ab1.html',
+                bgColor: '#000000'
+            },{
+                name: 'frame2',
+                url: 'ab2.html',
+                bgColor: '#000000'
+            },{
+                name: 'frame3',
+                url: 'ab3.html',
+                bgColor: '#000000'
+            }]
+        }, function(ret, err){
+
+        });
+
+      }
+  </script>
+  </html>

@@ -56,7 +56,7 @@
         var token='840b762525b4bc3762b4732700dab2c5';
         $api.setStorage('uid',uid);
         $api.setStorage('token',token);
-        api.openFrame({
+      /*  api.openFrame({
             name: 'main',
             url: 'html/main.html',
             bounces: false,
@@ -70,7 +70,16 @@
               uid:'18821',
               token:'840b762525b4bc3762b4732700dab2c5'
             }
+        });*/
+
+        api.openWin({
+            name: 'launch',
+            url: './html/launch.html',
+            pageParam: {
+                name: 'test'
+            }
         });
+
     };
 </script>
 

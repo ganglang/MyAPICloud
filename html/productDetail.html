@@ -21,7 +21,7 @@
   var goodsId;
   var carNum;
   var productData;
-  var imgData;
+  var imgData=[];
   var collected;
   var productModel;
   apiready = function(){
@@ -46,7 +46,9 @@
       if(200==_res.errcode){
           productData=_res.data;
           if(typeof _res.data.goods_img =='string'){
-            imgData.push(_res.data.goods_img)
+            if($api.isArray(imgData)){
+              imgData.push(_res.data.goods_img);
+            }
           }else if(_res.data.goods_img.length){
             imgData=_res.data.goods_img;
           }

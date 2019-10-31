@@ -9,7 +9,6 @@
   <body>
         <button onclick="getPicture()">上传图片</button>
         <img id="img" alt="" style="width:100px;height:auto">
-        <button onclick="openSlide()">打开侧边栏</button>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript">
@@ -31,10 +30,5 @@
 
   }
 
-  function openSlide() {
-    api.openSlidPane({
-      type: 'left'
-    });
-  }
   </script>
 </html>
