@@ -12,11 +12,96 @@
     <div id="product"></div>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/swipe.js"></script>
+  <script type="text/javascript" src="../script/crypto-js.js"></script>
   <script type="text/javascript" src="../script/common.js"></script>
   <script type="text/javascript">
+  var uid;
+  var token;
+  var goodsId;
+  var carNum;
+  var productData;
+  var imgData;
+  var collected;
+  var productModel;
   apiready = function(){
     $api.byId('product').innerHTML=api.pageParam.goodsId;
-
+    uid=api.pageParam.uid||$api.getStorage('uid');
+    token=api.pageParam.token||$api.getStorage('token');
+    goodsId=api.pageParam.goodsId;
+    getProductDetail();
+    getProductModel();
   };
+
+  function initSwiper(){
+
+  }
+
+  function getProductDetail(){
+    var str=paramsData({uid:uid,goodsId:goodsId});
+    var url=baseUrl+'/DetailsCommodity?'+str;
+    $api.get(url,function(ret) {
+      alert("基本信息:"+JSON.stringify(ret))
+      var _res=ret;
+      if(200==_res.errcode){
+          productData=_res.data;
+          if(typeof _res.data.goods_img =='string'){
+            imgData.push(_res.data.goods_img)
+          }else if(_res.data.goods_img.length){
+            imgData=_res.data.goods_img;
+          }
+          if(_res.data.is_collection==0){
+            collected=false
+          }else{
+            collected=true
+          }
+      }
+    },'json');
+  }
+
+  function getProductModel() {
+    var str=paramsData({uid:uid,goodsId:goodsId});
+    var url=baseUrl+'/SpecsCommodity?'+str;
+    $api.get(url,function(ret) {
+      alert("规格:"+JSON.stringify(ret))
+      var _res=ret;
+      if(200==_res.errcode){
+         if(_res.data.id==goodsId){
+           productModel=_res.data;
+           if(productModel.specs_name.length>0){
+             selectedModel=productModel.specs_name[0];
+           }
+         }
+       }
+    },'json');
+  }
+
+  function addToCart() {
+    var str=paramsData({uid:uid,goodsId:goodsId,carNum:carNum});
+    $api.get(url,function() {
+
+    },'json')
+  }
+
+  function changeNumber() {
+
+  }
+
+  function changeModel() {
+
+  }
+
+  function toOrderPage() {
+
+  }
+
+  function togglePop() {
+
+  }
+
+  function collect() {
+
+  }
+
   </script>
 </html>

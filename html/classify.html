@@ -4,15 +4,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>星咖生活</title>
+    <title>功能测试</title>
   </head>
   <body>
-        分类页面
+        <button onclick="getPicture()">上传图片</button>
+        <img id="img" alt="" style="width:100px;height:auto">
+        <button onclick="openSlide()">打开侧边栏</button>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript">
   apiready = function(){
 
   };
+  function getPicture() {
+    api.getPicture({
+      sourceType:'album',
+    },function(ret,err) {
+      if(ret){
+        var img=$api.byId('img');
+        $api.attr(img,'src',ret.data);
+        window.alert("上传图片成功"+ret.data);
+      }else{
+        window.alert(err.msg);
+      }
+    })
+
+  }
+
+  function openSlide() {
+    api.openSlidPane({
+      type: 'left'
+    });
+  }
   </script>
 </html>
