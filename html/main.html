@@ -7,7 +7,7 @@
     <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
     <title>星咖生活</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css" />
-      <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 
 <body>
@@ -66,7 +66,6 @@ function fnInital(){
   var footerBar=$api.dom('.foot-bar');
   barItems=$api.domAll(footerBar,'.barItem');
   footerBarH=$api.offset(footerBar).h;
-  //window.alert(footerBarH);
   toggleFrame(0);
 }
 
@@ -87,7 +86,7 @@ function toggleFrame(n) {
               uid: uid,
               token:token
           },
-          bounces: false,
+          bounces: true,
           bgColor: 'rgba(0,0,0,0)',
           vScrollBarEnabled: false,
           hScrollBarEnabled: false

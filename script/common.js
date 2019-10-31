@@ -16,3 +16,24 @@ function paramsData(data){
   newStr=newStr+'sign='+sign;
   return newStr;
 }
+
+
+function pullUpRefresh(callback){
+  api.addEventListener({
+      name: 'scrolltobottom',
+      extra:{
+        threshold:0
+      }
+  }, function(ret, err){
+     var timer;
+     clearTimeout(timer);
+     var loadMore=$api.dom('.loadMore');
+     $api.css(loadMore,'display:block');
+     timer=setTimeout(function() {
+       $api.css(loadMore,'display:none');
+       callback();
+     },3000)
+
+  });
+
+}

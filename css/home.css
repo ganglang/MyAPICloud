@@ -29,6 +29,10 @@ html, body {
   margin: 0;
   padding: 0; }
 
+div {
+  max-width: 100%;
+  box-sizing: border-box; }
+
 .foot-bar {
   display: flex;
   justify-content: space-between;
@@ -84,6 +88,13 @@ html, body {
       background-image: url("../icon/personal0_icon.png"); }
     .foot-bar .barItem:first-child + .barItem + .barItem + .barItem + .barItem.active .bar_icon {
       background-image: url("../icon/personal_icon.png"); }
+
+.loadMore .loadMore-text {
+  text-align: center;
+  color: #666;
+  font-size: 4.2666666667vw;
+  line-height: 4.8vw;
+  padding-bottom: 2.1333333333vw; }
 
 .search-bg {
   position: absolute;

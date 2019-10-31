@@ -12,8 +12,8 @@
 
         <div class="search-bg">
             <div class="search-box">
-                <input type="text" placeholder="  搜索">
-                <span class="sure-btn">确定</span>
+                <input type="text" placeholder="  搜索" oninput="getInput()" onfocus="showSure()" onblur="hideSure()" id="keyWord">
+                <span class="sure-btn" onclick="toSearch()" style="display:none">确定</span>
             </div>
         </div>
 
@@ -65,6 +65,12 @@
 
         </div>
 
+        <div class="loadMore" style="display:none;">
+          <div class="loadMore-text">
+            加载更多...
+          </div>
+        </div>
+
     </div>
 
   </body>
@@ -78,14 +84,17 @@
   var token;
   var slider;
   var searchVal;
+  var page=1;
+  var productsData;
   apiready = function(){
     uid=api.pageParam.uid||$api.getStorage('uid');
     token=api.pageParam.token||$api.getStorage('token');
     getSlideList();
     getProductsList();
-  /*  setTimeout(function() {
+    setTimeout(function() {
       initalSwipe();
-    },500)*/
+    },500);
+    pullUpRefresh(getProductsList);
   };
   function initalSwipe(){
     slider=Swipe($api.byId('slider'),{
@@ -102,13 +111,13 @@
           //window.alert("slide:"+JSON.stringify(ret));
           var slide=doT.template($api.dom('#slideTemp').innerHTML);
           $api.dom('.swipe-wrap').innerHTML=slide(_res.data);
-          window.alert(slide(_res.data));
+          //window.alert(slide(_res.data));
           initalSwipe();
       }
     },'json');
   }
   function getProductsList(){
-    var _page=1;
+    var _page=page;
     var pagesize=4;
     var sku_name=searchVal||'';
     var data;
@@ -123,11 +132,39 @@
       var _res=ret;
       if(200==_res.errcode){
           //window.alert("goods:"+JSON.stringify(ret));
+          if(page==1){
+            productsData=_res.data;
+          }else{
+            productsData=productsData.concat(_res.data);
+          }
           var goods=doT.template($api.dom('#goodsTemp').innerHTML);
-          $api.byId('goods').innerHTML=goods(_res.data);
-
+          $api.byId('goods').innerHTML=goods(productsData);
+          page++;
       }
     },'json')
+  }
+  function getInput(){
+    var input=$api.byId('keyWord');
+    if(input.value){
+      $api.css(input,'backgroundImage:none');
+    }else{
+      $api.css(input,'backgroundImage:url("../assets/imgs/home/search_btn.png")');
+      window.alert("空的")
+    }
+    searchVal=input.value.trim();
+  }
+  function showSure() {
+    var btn_sure=$api.dom('.sure-btn');
+    $api.css(btn_sure,"display:block");
+  }
+  function hideSure() {
+    var btn_sure=$api.dom('.sure-btn');
+    setTimeout(function() {
+      $api.css(btn_sure,"display:none");
+    },1000)
+  }
+  function toSearch() {
+
   }
   </script>
 </html>
