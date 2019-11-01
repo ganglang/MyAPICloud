@@ -57,12 +57,12 @@
                     lon: ret.lon,
                     lat: ret.lat
                 },function(ret,err){
-                    alert("回调的回调");
+                    alert("回调的回调"+JSON.stringify(ret)+"-"+JSON.stringify(err));
                     if(ret.status){
                         //alert(JSON.stringify(ret.city));
                         currentCity=ret.city.replace('市','');
-                        openCityList();
                         alert("您当前所在的城市为:"+currentCity);
+                        openCityList();
                     }else {
                       alert("err:"+Json.stringify(err));
                     }
