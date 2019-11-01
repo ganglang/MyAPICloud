@@ -42,10 +42,10 @@
         bMap=api.require('bMap');
         UICityList=api.require('UICityList');
         getLocation();
+        openCityList();
       };
 
       function getLocation() {
-        alert("bMap"+bMap+"~~"+UICityList);
         bMap.getLocation({
             accuracy: '10m',
             autoStop: true,
@@ -62,9 +62,9 @@
                         //alert(JSON.stringify(ret.city));
                         currentCity=ret.city.replace('市','');
                         alert("您当前所在的城市为:"+currentCity);
-                        openCityList();
+                        //openCityList();
                     }else {
-                      alert("err:"+Json.stringify(err));
+                      alert("err:"+JSON.stringify(err));
                     }
                 });
             }else{
@@ -74,7 +74,6 @@
       }
 
       function openCityList(){
-        alert("开始获取城市列表");
         UICityList.open({
             rect: {
                 x: 0,
