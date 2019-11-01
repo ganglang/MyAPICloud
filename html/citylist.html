@@ -51,13 +51,13 @@
             autoStop: true,
             filter: 1
         }, function(ret, err){
-            alert("回调");
             if(ret.status){
-                //alert("定位成功:"+JSON.stringify(ret));
+                alert("定位成功:"+JSON.stringify(ret));
                 bMap.getNameFromCoords({
                     lon: ret.lon,
                     lat: ret.lat
                 },function(ret,err){
+                    alert("回调的回调");
                     if(ret.status){
                         //alert(JSON.stringify(ret.city));
                         currentCity=ret.city.replace('市','');
