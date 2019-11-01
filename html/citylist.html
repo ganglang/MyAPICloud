@@ -26,6 +26,7 @@
       var UICityList;
       var currentCity;
       apiready = function(){
+        alert('~1');
         fnReadyHeader();
         fnReadyReturnEvent();
       /*  api.startLocation({
@@ -39,12 +40,14 @@
             window.alert("error:"+err.msg)
           }
         })*/
+        alert('~2');
         bMap=api.require('bMap');
         UICityList=api.require('UICityList');
         getLocation();
       };
 
       function getLocation() {
+        alert('~3');
         bMap.getLocation({
             accuracy: '10m',
             autoStop: true,

@@ -43,6 +43,8 @@
         var header = $api.dom('header'); // 获取 header 标签元素
         var footer = $api.dom('footer'); // 获取 footer 标签元素
 
+        api.removeLaunchView();
+
         // 1.修复开启沉浸式效果带来的顶部Header与手机状态栏重合的问题，最新api.js方法已支持适配iPhoneX；
         // 2.默认已开启了沉浸式效果 config.xml中 <preference name="statusBarAppearance" value="true"/>
         // 3.沉浸式效果适配支持iOS7+，Android4.4+以上版本
