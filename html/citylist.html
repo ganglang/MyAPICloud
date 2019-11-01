@@ -51,6 +51,7 @@
             autoStop: true,
             filter: 1
         }, function(ret, err){
+            alert("回调");
             if(ret.status){
                 //alert("定位成功:"+JSON.stringify(ret));
                 bMap.getNameFromCoords({
@@ -70,10 +71,10 @@
                 alert(err.code);
             }
         });
-        alert("end!!");
       }
 
       function openCityList(){
+        alert("开始获取城市列表");
         UICityList.open({
             rect: {
                 x: 0,
@@ -115,9 +116,9 @@
             placeholder: '输入城市名或首字母查询'
         }, function( ret, err ) {
             if( ret ){
-                 //alert( JSON.stringify( ret ) );
+                 alert("获取城市列表成功:"+JSON.stringify( ret ) );
             }else{
-                 //alert( JSON.stringify( err ) );
+                 alert("获取城市列表失败:"+JSON.stringify( err ) );
             }
         });
       }
