@@ -130,7 +130,7 @@ function fnReadyReturnEvent(){
   for(var i=0;i<btns.length;i++){
     $api.attr(btns[i],'tapmode','active');
     btns[i].onclick=function() {
-      api.closeWin();  
+      api.closeWin();
     }
   }
 }

@@ -8,11 +8,35 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
   </head>
+  <style>
+  .link-btn{
+    width: 150px;
+    max-width: 200px;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    padding: 4px 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    color: #000;
+    margin:0 auto;
+    margin-top: 10px;
+  }
+  .position{
+    font-size: 18px;
+    line-height: 24px;
+    margin-top: 16px;
+    color: #000;
+    padding-left: 16px;
+  }
+  </style>
   <body>
     <div id="header">
       <div class="return-btn"></div>
       个人中心
     </div>
+    <div class="position">您所在的城市:<span id="location"></span> </div>
+    <div class="open-win link-btn" win="citylist">选择城市</div>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript" src="../script/common.js"></script>
@@ -20,6 +44,27 @@
   apiready = function(){
     fnReadyHeader();
     fnReadyReturnEvent();
+    fnReadyOpenWin();
+    cityChange();
   };
+
+  var location;
+  function cityChange() {
+    alert("cityChange");
+    api.addEventListener({
+        name: 'cityChange'
+    }, function(ret, err){
+        alert('监听事件2'+JSON.stringify(ret));
+        var city=ret.value.city||'北京';
+        location=$api.dom('#location');
+        location.innerHTML=city;
+    });
+  }
+
+  function setCity(city) {
+    alert("被调用了");
+    location=$api.dom('#location');
+    location.innerHTML=city;
+  }
   </script>
 </html>

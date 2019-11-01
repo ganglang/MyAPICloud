@@ -30,3 +30,8 @@ if(api.systemType=='ios'){
 原因:执行UICityList的open函数时，还没获取到当前所在的城市。
 解决方案：将UICityList的open函数放到bMap模块获取当前所在城市的成功回调函数里调用。
 ps:api.startLocation这个方法似乎在安卓机上不管用。推荐用bMap
+
+#### 问题7：personal.html使用addEventListener监听了事件，citylist使用sendEvent广播事件，从personal.html到citylist.html，在citylist.html里使用closeWin返回personal.html，结果报错:Can Not Find File:[object HTMLSpanElement].txt;当使用execScript方法也出现同样的问题。
+原因:不明
+解决方案:暂无
+ps:先监听在广播，即使用addEventListener函数的页面要先打开，使用sendEvent的页面后打开，广播事件才可以收到，听说只有在window下才可以用，frame不行，未检测。

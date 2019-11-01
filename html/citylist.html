@@ -52,17 +52,31 @@
             filter: 1
         }, function(ret, err){
             if(ret.status){
-                alert("定位成功:"+JSON.stringify(ret));
+                //alert("定位成功:"+JSON.stringify(ret));
                 bMap.getNameFromCoords({
                     lon: ret.lon,
                     lat: ret.lat
                 },function(ret,err){
-                    alert("回调的回调"+JSON.stringify(ret)+"-"+JSON.stringify(err));
+                    //alert("回调的回调"+JSON.stringify(ret)+"-"+JSON.stringify(err));
                     if(ret.status){
                         //alert(JSON.stringify(ret.city));
                         currentCity=ret.city.replace('市','');
-                        alert("您当前所在的城市为:"+currentCity);
+                        //alert("您当前所在的城市为:"+currentCity);
+
+                        api.execScript({
+                            name: 'personal',
+                            script: 'setCity("'+currentCity+'")'
+                        });
+
+
+                        api.sendEvent({
+                          name:'cityChange',
+                          extra:{
+                            city:currentCity
+                          }
+                        });
                         //openCityList();
+                        //alert('窗口的名称:'+api.winName);
                     }else {
                       alert("err:"+JSON.stringify(err));
                     }
@@ -114,11 +128,11 @@
             fixedOn: api.frameName,
             placeholder: '输入城市名或首字母查询'
         }, function( ret, err ) {
-            if( ret ){
+            /*if( ret ){
                  alert("获取城市列表成功:"+JSON.stringify( ret ) );
             }else{
                  alert("获取城市列表失败:"+JSON.stringify( err ) );
-            }
+            }*/
         });
       }
   </script>

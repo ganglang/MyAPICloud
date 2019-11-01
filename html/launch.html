@@ -22,25 +22,37 @@
             margin:0 auto;
             margin-top: 10px;
           }
+          .position{
+            font-size: 18px;
+            line-height: 24px;
+            margin-top: 16px;
+            color: #000;
+            padding-left: 16px;
+          }
       </style>
   </head>
   <body>
     <div id="header">启动页</div>
+    <div class="position">您所在的城市:<span id="location"></span> </div>
     <div class="open-win link-btn" win="main">商城首页</div>
     <div class="open-win link-btn" win="citylist">选择城市</div>
     <div class="open-win link-btn" win="personal" needLogin="true">个人中心</div>
     <div class="link-btn" tapmode onclick="openPane()">左侧边栏</div>
     <div class="link-btn" tapmode onclick="openWechat()">打开微信</div>
     <div class="link-btn" tapmode onclick="openAlipay()">支付宝支付</div>
+    <div class="link-btn" tapmode onclick="popSheet()">底部弹出框</div>
+    <div class="link-btn" tapmode onclick="showProgress()">进度条</div>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript" src="../script/common.js"></script>
   <script type="text/javascript">
-  var aliPayPlus;
+      var aliPayPlus;
       apiready = function(){
         fnOpenFrameGroup();
         fnReadyOpenWin();
         //initSlidLayout();
+        addReturnEvent();
+        cityChange();
       };
       function fnOpenFrameGroup() {
         var timer;
@@ -142,6 +154,78 @@
               }
           });
         }
+      }
+
+      function popSheet() {
+        api.actionSheet({
+            title: '底部弹出框测试',
+            cancelTitle: '这里是取消按钮',
+            destructiveTitle: '红色警告按钮',
+            buttons: ['1','2','3']
+        }, function(ret, err){
+            if( ret ){
+                 alert( JSON.stringify( ret ) );
+            }else{
+                 alert( JSON.stringify( err ) );
+            }
+        });
+
+      }
+
+      var timer;
+      function showProgress() {
+        clearTimeout(timer);
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text:'',
+            modal: false
+        });
+        setTimeout(function() {
+          api.hideProgress();
+        },3000)
+      }
+
+      function addReturnEvent() {
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err){
+          //alert("按了返回键了");
+          closeWidget();
+        });
+      }
+
+      var flag=false;
+      function closeWidget() {
+        if(!flag){
+          api.toast({
+              msg: '再按一次退出应用',
+              duration: 2000,
+              location: 'bottom'
+          });
+          flag=true;
+          setTimeout(function(){
+            flag=false;
+          },3000)
+        }else{
+          api.closeWidget();
+        }
+
+      }
+
+      var location;
+      function cityChange() {
+        alert("cityChange");
+        api.addEventListener({
+            name: 'cityChange'
+        }, function(ret, err){
+            alert('监听事件1'+JSON.stringify(ret));
+            var city=ret.value.city||'北京';
+            location=$api.dom('#location');
+            location.innerHTML=city;
+        });
+
       }
   </script>
   </html>
