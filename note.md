@@ -25,3 +25,8 @@ if(api.systemType=='ios'){
 ```
 <link rel="stylesheet" type="text/css" href="../css/api.css"/>
 ```
+
+#### 问题6：使用bMap模块来获取当前所在定位和当前所在城市，然后使用UICityList模块来显示城市列表，使用UICityList的open函数，当设置拿到的当前所在城市时不成功。
+原因:执行UICityList的open函数时，还没获取到当前所在的城市。
+解决方案：将UICityList的open函数放到bMap模块获取当前所在城市的成功回调函数里调用。
+ps:api.startLocation这个方法似乎在安卓机上不管用。推荐用bMap

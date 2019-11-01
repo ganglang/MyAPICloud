@@ -123,3 +123,14 @@ function fnReadyOpenFrame() {
       hScrollBarEnabled: true
   });
 }
+
+//返回上一页函数
+function fnReadyReturnEvent(){
+  var btns=$api.domAll('.return-btn');
+  for(var i=0;i<btns.length;i++){
+    $api.attr(btns[i],'tapmode','active');
+    btns[i].onclick=function() {
+      api.closeWin();  
+    }
+  }
+}

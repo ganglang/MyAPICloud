@@ -139,3 +139,26 @@ div{
     padding-bottom: pxToVw(8);
   }
 }
+
+#header{
+  font-size:pxToVw(18);
+  line-height: pxToVw(32);
+  padding-top: pxToVw(10);
+  padding-bottom: pxToVw(6);
+  color: #000000;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  position: relative;
+  .return-btn{
+    position: absolute;
+    top:pxToVw(10);
+    left: pxToVw(0);
+    width: pxToVw(32);
+    height: pxToVw(32);
+    background-image: url('../assets/icon/return.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: pxToVw(10) auto;
+  }
+}

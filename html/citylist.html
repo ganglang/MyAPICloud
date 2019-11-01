@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>城市列表</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+    <div id="header">
+      <div class="return-btn"></div>
+      城市列表
+    </div>
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript">
+      var bMap;
+      var UICityList;
+      var currentCity;
+      apiready = function(){
+        fnReadyHeader();
+        fnReadyReturnEvent();
+      /*  api.startLocation({
+          accuracy:'10m',
+          filter:5.0,
+          autoStop:true
+        },function(ret,err) {
+          if(ret){
+            window.alert("定位成功"+JSON.stringify(ret));
+          }else{
+            window.alert("error:"+err.msg)
+          }
+        })*/
+        bMap=api.require('bMap');
+        UICityList=api.require('UICityList');
+        getLocation();
+      };
+
+      function getLocation() {
+        bMap.getLocation({
+            accuracy: '10m',
+            autoStop: true,
+            filter: 1
+        }, function(ret, err){
+            if(ret.status){
+                //alert("定位成功:"+JSON.stringify(ret));
+                bMap.getNameFromCoords({
+                    lon: ret.lon,
+                    lat: ret.lat
+                },function(ret,err){
+                    if(ret.status){
+                        //alert(JSON.stringify(ret.city));
+                        currentCity=ret.city.replace('市','');
+                        openCityList();
+                        alert("您当前所在的城市为:"+currentCity);
+                    }
+                });
+
+            }else{
+                alert(err.code);
+            }
+        });
+      }
+
+      function openCityList(){
+        UICityList.open({
+            rect: {
+                x: 0,
+                y: headerHeight,
+                w: api.frameWidth,
+                h: api.frameHeight-headerHeight
+            },
+            resource: 'widget://res/cityList.json',
+            styles: {
+                searchBar: {
+                    bgColor: '#696969',
+                    cancelColor: '#E3E3E3'
+                },
+                location: {
+                    color: '#696969',
+                    size: 12
+                },
+                sectionTitle: {
+                    bgColor: '#eee',
+                    color: '#000',
+                    size: 12
+                },
+                item: {
+                    bgColor: '#fff',
+                    activeBgColor: '#696969',
+                    color: '#000',
+                    size: 14,
+                    height: 40
+                },
+                indicator: {
+                    bgColor: '#fff',
+                    color: '#696969'
+                }
+            },
+            currentCity: currentCity,
+            locationWay: 'GPS',
+            hotTitle: '热门城市',
+            fixedOn: api.frameName,
+            placeholder: '输入城市名或首字母查询'
+        }, function( ret, err ) {
+            if( ret ){
+                 //alert( JSON.stringify( ret ) );
+            }else{
+                 //alert( JSON.stringify( err ) );
+            }
+        });
+      }
+  </script>
+  </html>

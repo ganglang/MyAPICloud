@@ -7,7 +7,7 @@
         Developer
     </author>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="*" />    <feature name="aliPayPlus">      <param name="urlScheme" value="AliPayPlusA000000011" />    </feature>
     <preference name="pageBounce" value="false"/>
 	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
 	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>

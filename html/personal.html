@@ -5,14 +5,21 @@
     <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
     <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
     <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
   </head>
   <body>
-    个人中心
+    <div id="header">
+      <div class="return-btn"></div>
+      个人中心
+    </div>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
   <script type="text/javascript">
   apiready = function(){
-
+    fnReadyHeader();
+    fnReadyReturnEvent();
   };
   </script>
 </html>

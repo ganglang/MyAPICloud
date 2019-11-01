@@ -5,22 +5,44 @@
       <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
       <title>title</title>
       <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <link rel="stylesheet" type="text/css" href="../css/common.css"/>
       <style>
           body{
-
+          }
+          .link-btn{
+            width: 150px;
+            max-width: 200px;
+            font-size: 18px;
+            line-height: 24px;
+            text-align: center;
+            padding: 4px 8px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            color: #000;
+            margin:0 auto;
+            margin-top: 10px;
           }
       </style>
   </head>
   <body>
-    启动页
+    <div id="header">启动页</div>
+    <div class="open-win link-btn" win="main">商城首页</div>
+    <div class="open-win link-btn" win="citylist">选择城市</div>
+    <div class="open-win link-btn" win="personal" needLogin="true">个人中心</div>
+    <div class="link-btn" tapmode onclick="openPane()">左侧边栏</div>
+    <div class="link-btn" tapmode onclick="openWechat()">打开微信</div>
+    <div class="link-btn" tapmode onclick="openAlipay()">支付宝支付</div>
   </body>
   <script type="text/javascript" src="../script/api.js"></script>
   <script type="text/javascript" src="../script/common.js"></script>
   <script type="text/javascript">
       apiready = function(){
         fnOpenFrameGroup();
+        fnReadyOpenWin();
+        //initSlidLayout();
       };
       function fnOpenFrameGroup() {
+        var timer;
         api.openFrameGroup ({
             name: 'group1',
             background: '#fff',
@@ -46,9 +68,74 @@
                 bgColor: '#000000'
             }]
         }, function(ret, err){
-
+          clearTimeout(timer);
+          timer=setTimeout(function() {
+            api.setFrameGroupIndex({
+                name: 'group1',
+                index:ret.index+1
+            })
+          },3000)
         });
 
+      }
+
+      function initSlidLayout() {
+        api.openSlidLayout ({
+            type: 'left',
+            slidePaneStyle:{
+              leftEdge:80
+            },
+            slidPane: {
+                name: 'login',
+                url: 'login.html',
+                bgColor: '#fff',
+                bounces: true,
+                vScrollBarEnabled: true,
+                hScrollBarEnabled: false
+            }
+        }, function(ret, err){
+          alert("回调函数");
+        });
+
+      }
+
+      function openPane() {
+        setTimeout(function() {
+          api.openSlidPane({
+              type: 'left'
+          });
+        },200)
+
+      }
+
+      function openAlipay() {
+        if(api.systemType=='ios'){
+
+        }else{
+
+        }
+      }
+
+      function openWechat() {
+        if(api.systemType=='ios'){
+          api.openApp({
+              iosUrl: 'weixin://',     //打开微信，其中weixin为微信的URL Scheme
+              appParam: {
+                  appParam: 'app参数'
+              }
+          });
+
+        }else{
+          api.openApp({
+              androidPkg:'com.tencent.mm',
+          }, function(ret, err) {
+              if (ret) {
+                  alert(JSON.stringify(ret));
+              } else {
+                  alert(JSON.stringify(err));
+              }
+          });
+        }
       }
   </script>
   </html>
